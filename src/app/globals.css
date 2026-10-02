@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: 246 243 236;
+  --surface: 255 253 248;
+  --ink: 24 22 28;
+  --muted: 98 94 104;
+  --line: 222 216 204;
+  --accent: 14 110 106;
+  --accent-soft: 214 236 232;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: 17 16 20;
+  --surface: 26 25 31;
+  --ink: 238 234 226;
+  --muted: 160 155 166;
+  --line: 48 46 56;
+  --accent: 94 214 200;
+  --accent-soft: 18 52 50;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: 17 16 20;
+    --surface: 26 25 31;
+    --ink: 238 234 226;
+    --muted: 160 155 166;
+    --line: 48 46 56;
+    --accent: 94 214 200;
+    --accent-soft: 18 52 50;
+    color-scheme: dark;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.25);
+}
+
+.grain {
+  background-image: radial-gradient(rgb(var(--ink) / 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
